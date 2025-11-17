@@ -1,6 +1,6 @@
 # Analyst1 - Screenshot to Text Converter
 
-A local web application that converts screenshots and images into copy-pasteable text using OCR (Optical Character Recognition).
+A simple, local web application that converts screenshots and images into copy-pasteable text using OCR (Optical Character Recognition). Perfect for quickly extracting text from screenshots, images, or scanned documents.
 
 ## Features
 
@@ -9,6 +9,7 @@ A local web application that converts screenshots and images into copy-pasteable
 - **OCR Processing**: Extracts text from images using Tesseract OCR
 - **Copy to Clipboard**: One-click copy of extracted text
 - **Modern UI**: Clean, responsive interface
+- **No Data Leaves Your Machine**: All processing happens locally
 
 ## Prerequisites
 
@@ -20,8 +21,9 @@ A local web application that converts screenshots and images into copy-pasteable
 
 ## Installation
 
-1. Navigate to the project directory:
+1. Clone the repository:
    ```bash
+   git clone https://github.com/athenam1/Analyst1.git
    cd Analyst1
    ```
 
@@ -47,7 +49,7 @@ A local web application that converts screenshots and images into copy-pasteable
 
 3. Open your browser and navigate to:
    ```
-   http://127.0.0.1:5000
+   http://127.0.0.1:5001
    ```
 
 ## Usage
@@ -80,7 +82,17 @@ If port 5000 is already in use, you can change it in `app.py`:
 app.run(debug=True, host='127.0.0.1', port=5001)  # Change 5001 to any available port
 ```
 
+## Technology Stack
+
+- **Backend**: Flask (Python)
+- **OCR Engine**: Tesseract OCR
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **Image Processing**: Pillow (PIL)
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
 ## License
 
-This project is open source and available for personal use.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
