@@ -8,10 +8,11 @@ import os
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
-# Configure Tesseract path (if needed - uncomment and adjust for your system)
-# For macOS with Homebrew: pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
-# For Linux: usually already in PATH
-# For Windows: pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# Configure Tesseract path (only if not in Docker/standard location)
+# In Docker, Tesseract is in the standard PATH, so we only set this if needed
+if os.path.exists('/opt/homebrew/bin/tesseract'):
+    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+# Docker/standard Linux installation will use the default PATH
 
 @app.route('/')
 def index():
@@ -51,5 +52,7 @@ def extract_text():
         }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5001)
-
+    port = int(os.environ.get('PORT', 5001))
+    host = os.environ.get('HOST', '0.0.0.0')
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    app.run(debug=debug, host=host, port=port)

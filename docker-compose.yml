@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  analyst1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: analyst1
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
