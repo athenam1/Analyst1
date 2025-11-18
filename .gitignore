@@ -27,3 +27,9 @@ Thumbs.db
 # Logs
 *.log
 
+# Credentials
+set_linkedin_credentials.sh
+*.env
+.env
+*credentials*
+*secrets*
