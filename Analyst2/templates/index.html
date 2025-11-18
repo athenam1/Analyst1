@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst2 - Web Information Gatherer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Analyst2</h1>
+            <p class="subtitle">Gather information from the internet</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="urlInput">Enter URL to analyze:</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="urlInput" placeholder="https://example.com" />
+                        <button class="btn btn-primary" id="gatherBtn">Gather Info</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Gathering information from the web...</p>
+            </div>
+
+            <div class="error" id="error" style="display: none;">
+                <p id="errorMessage"></p>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-header">
+                    <h2 id="resultTitle">Gathered Information</h2>
+                    <button class="btn btn-secondary" id="clearBtn">Clear & Try Another</button>
+                </div>
+
+                <div class="info-card">
+                    <h3>URL</h3>
+                    <p class="url-display" id="resultUrl"></p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Title</h3>
+                    <p id="resultTitleText"></p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Content</h3>
+                    <div class="content-output">
+                        <textarea id="resultContent" readonly></textarea>
+                        <button class="btn btn-primary btn-small" id="copyContentBtn">Copy Content</button>
+                    </div>
+                </div>
+
+                <div class="info-card" id="linksCard" style="display: none;">
+                    <h3>Links Found (<span id="linksCount">0</span>)</h3>
+                    <div class="links-list" id="linksList"></div>
+                </div>
+
+                <div class="info-card" id="imagesCard" style="display: none;">
+                    <h3>Images Found (<span id="imagesCount">0</span>)</h3>
+                    <div class="images-list" id="imagesList"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

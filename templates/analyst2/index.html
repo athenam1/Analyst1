@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst2 - LinkedIn Employee Count Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analyst2/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="/" class="back-link">← Back to Portal</a>
+                <h1>Analyst2</h1>
+                <p class="subtitle">LinkedIn Employee Count Scraper</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="urlsInput">Enter LinkedIn Company URLs (one per line):</label>
+                    <textarea id="urlsInput" placeholder="https://www.linkedin.com/company/adobe&#10;https://www.linkedin.com/company/ai21&#10;https://www.linkedin.com/company/microsoft"></textarea>
+                    <div class="input-actions">
+                        <button class="btn btn-primary" id="scrapeBtn">Scrape Employee Counts</button>
+                        <button class="btn btn-secondary" id="clearBtn" style="display: none;">Clear Results</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p id="loadingText">Processing LinkedIn URLs...</p>
+                <div class="progress-info" id="progressInfo"></div>
+            </div>
+
+            <div class="error" id="error" style="display: none;">
+                <p id="errorMessage"></p>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-header">
+                    <h2>Results</h2>
+                    <div class="result-actions">
+                        <button class="btn btn-secondary btn-small" id="exportCsvBtn">Export CSV</button>
+                        <button class="btn btn-secondary btn-small" id="copyTableBtn">Copy Table</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>LinkedIn URL</th>
+                                <th>Employee Count</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/analyst2/app.js') }}"></script>
+</body>
+</html>

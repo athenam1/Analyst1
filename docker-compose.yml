@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  analyst1:
+  analyst-portal:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: analyst1
+    container_name: analyst-portal
     ports:
       - "5001:5001"
     environment:
@@ -19,4 +19,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
-
