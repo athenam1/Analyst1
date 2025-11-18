@@ -56,9 +56,17 @@ async function scrapeLinkedIn() {
     progressInfo.textContent = '';
     
     try {
-        // Add timeout to fetch request (5 minutes for multiple URLs)
+        // Calculate timeout based on number of URLs (60 seconds per URL, minimum 3 minutes, maximum 30 minutes)
+        // More generous timeout to account for LinkedIn page loads and extraction time
+        const timeoutPerUrl = 60000; // 60 seconds per URL (increased from 30)
+        const minTimeout = 180000; // 3 minutes minimum (increased from 2)
+        const maxTimeout = 1800000; // 30 minutes maximum (increased from 20)
+        const calculatedTimeout = Math.min(Math.max(urls.length * timeoutPerUrl, minTimeout), maxTimeout);
+        console.log(`Timeout set to ${(calculatedTimeout / 1000 / 60).toFixed(1)} minutes for ${urls.length} URLs`);
+        
+        // Add timeout to fetch request
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes
+        const timeoutId = setTimeout(() => controller.abort(), calculatedTimeout);
         
         const response = await fetch('/analyst2/scrape-linkedin', {
             method: 'POST',
