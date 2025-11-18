@@ -4,9 +4,6 @@ from PIL import Image
 import io
 import base64
 import os
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
 import re
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -29,10 +26,6 @@ if os.path.exists('/opt/homebrew/bin/tesseract'):
     pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
 # Docker/standard Linux installation will use the default PATH
 
-# User agent for web scraping
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-}
 
 # ============================================================================
 # Portal Landing Page
@@ -346,7 +339,7 @@ def scrape_linkedin():
                 try:
                     result = scrape_linkedin_company(url, driver, wait)
                     results.append(result)
-                    # OPTIMIZATION: Reduced delay between requests (was 2s, now 0.5s)
+                    # Small delay between URLs to avoid rate limiting
                     # LinkedIn may still rate limit, but this is faster for testing
                     if i < len(cleaned_urls) - 1:  # Don't sleep after last URL
                         time.sleep(0.5)

@@ -29,6 +29,7 @@ Thumbs.db
 
 # Credentials
 set_linkedin_credentials.sh
+start_app.sh
 *.env
 .env
 *credentials*
